@@ -30,14 +30,14 @@
 
         <h2>Telefones</h2>
         @if ($telefones)
-        <ul >
-            <li>
+        <ul style="padding: 15px;">
+            <li style="padding: 10px;">
                 <p><strong>Telefone Celular: </strong> <br>{{ $telefones->telefone_celular ?? 'Nenhum telefone celular cadastrado' }}</p>
             </li>
-            <li>
+            <li style="padding: 10px;">
                 <p><strong>Telefone Comercial:</strong> <br>{{ $telefones->telefone_comercial ?? 'Nenhum telefone comercial cadastrado' }}</p>
             </li>
-            <li>
+            <li style="padding: 10px;">
                 <p><strong>Telefone Residencial:</strong> <br> {{ $telefones->telefone_residencial ?? 'Nenhum telefone residencial cadastrado' }}</p>
             </li>
         </ul>

@@ -32,10 +32,10 @@
                         <input type="text" class="form-control" placeholder="Telefone Celular" name="telefone_celular" id="telefone_celular" required>
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="Telefone Comercial" name="telefone_comercial" id="telefone_comercial" required>
+                        <input type="text" class="form-control" placeholder="Telefone Comercial" name="telefone_comercial" id="telefone_comercial">
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="Telefone Residencial" name="telefone_residencial" id="telefone_residencial" required>
+                        <input type="text" class="form-control" placeholder="Telefone Residencial" name="telefone_residencial" id="telefone_residencial">
                     </div>
                 </div>
                 <div class="row form-group">
