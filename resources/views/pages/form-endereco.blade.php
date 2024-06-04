@@ -26,70 +26,106 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" placeholder="CEP" name="cep" id="cep" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" placeholder="Rua" name="endereco" id="endereco" required>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" placeholder="Número" name="numero_residencia" id="numero_residencia" required>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" placeholder="Bairro" name="bairro" id="bairro" required>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" placeholder="Cidade" name="cidade" id="cidade" required>
+                    </div>
+                    <div class="col-sm-2">
+                        <select class="form-control" name="uf" id="uf" required>
+                            <option value="">Selecione um estado</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+                </div>
 
-                    <div class="row form-group">
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" placeholder="CEP" name="cep" id="cep" required>
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" placeholder="Rua" name="endereco" id="endereco" required>
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" placeholder="Número" name="numero_residencia" id="numero_residencia" required>
-                        </div>
+                <div class="row form-group">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary">Salvar Endereço</button>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" placeholder="Bairro" name="bairro" id="bairro" required>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Cidade" name="cidade" id="cidade" required>
-                        </div>
-                        <div class="col-sm-2">
-                            <select class="form-control" name="uf" id="uf" required>
-                                <option value="">Selecione um estado</option>
-                                <!-- Add options for states here -->
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary">Salvar Endereço</button>
-                        </div>
-                    </div>
+                </div>
             </form>
         </div>
     </div>
 
+    <!-- Adicione o jQuery e jQuery Mask Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#cep').mask('00000-000');
-        });
 
-        document.getElementById('contato_id').addEventListener('change', function() {
-            const contato_id = this.value;
-            if (contato_id) {
-                fetch(`/enderecos/${contato_id}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data) {
-                            document.getElementById('cep').value = data.cep;
-                            document.getElementById('endereco').value = data.endereco;
-                            document.getElementById('numero_residencia').value = data.numero_residencia;
-                            document.getElementById('bairro').value = data.bairro;
-                            document.getElementById('cidade').value = data.cidade;
-                            document.getElementById('uf').value = data.uf;
-                        } else {
-                            document.getElementById('cep').value = '';
-                            document.getElementById('endereco').value = '';
-                            document.getElementById('numero_residencia').value = '';
-                            document.getElementById('bairro').value = '';
-                            document.getElementById('cidade').value = '';
-                            document.getElementById('uf').value = '';
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
+            $('#cep').on('blur', function() {
+                var cep = $(this).val().replace(/\D/g, '');
+                if (cep != "") {
+                    var validacep = /^[0-9]{8}$/;
+                    if (validacep.test(cep)) {
+                        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
+                            if (!("erro" in dados)) {
+                                $('#endereco').val(dados.logradouro);
+                                $('#bairro').val(dados.bairro);
+                                $('#cidade').val(dados.localidade);
+                                $('#uf').val(dados.uf);
+                            } else {
+                                limpaFormularioCep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } else {
+                        limpaFormularioCep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } else {
+                    limpaFormularioCep();
+                }
+            });
+
+            function limpaFormularioCep() {
+                $('#endereco').val("");
+                $('#bairro').val("");
+                $('#cidade').val("");
+                $('#uf').val("");
             }
         });
     </script>

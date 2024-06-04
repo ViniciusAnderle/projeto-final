@@ -26,27 +26,30 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="row form-group">
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Telefone Celular" name="telefone_celular" id="telefone_celular" required>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Telefone Comercial" name="telefone_comercial" id="telefone_comercial" required>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" placeholder="Telefone Residencial" name="telefone_residencial" id="telefone_residencial" required>
-                        </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" placeholder="Telefone Celular" name="telefone_celular" id="telefone_celular" required>
                     </div>
-
-                    <div class="row form-group">
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary">Salvar Telefone</button>
-                        </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" placeholder="Telefone Comercial" name="telefone_comercial" id="telefone_comercial" required>
                     </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" placeholder="Telefone Residencial" name="telefone_residencial" id="telefone_residencial" required>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary">Salvar Telefone</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
+
+    <!-- Adicione o jQuery e jQuery Mask Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -70,6 +73,9 @@
                             document.getElementById('telefone_comercial').value = '';
                             document.getElementById('telefone_residencial').value = '';
                         }
+                        $('#telefone_celular').trigger('input');
+                        $('#telefone_comercial').trigger('input');
+                        $('#telefone_residencial').trigger('input');
                     })
                     .catch(error => console.error('Error:', error));
             }
