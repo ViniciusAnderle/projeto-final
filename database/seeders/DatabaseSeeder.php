@@ -10,6 +10,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ContatoSeeder::class);
         $this->call(TelefoneSeeder::class);
+        $this->call(EnderecoSeeder::class);
+
 
     }
 }
