@@ -24,10 +24,10 @@ class EnderecoSeeder extends Seeder
 
         Endereco::create([
             'contato_id' => '24',
-            'cep' => '190',
-            'endereco' => '',
-            'numero_residencia' => '',
-            'bairro' => '',
+            'cep' => ' 85010-100',
+            'endereco' => 'Rua Senador Pinheiro Machado',
+            'numero_residencia' => '1230',
+            'bairro' => 'Centro',
             'cidade' => 'Guarapuava',
             'uf' => 'PR'
 
