@@ -40,15 +40,9 @@ class ContatoController extends Controller
             'cpf' => 'required|string|max:14|unique:contatos',
             'email' => 'required|string|email|max:255|unique:contatos',
             'data_nascimento' => 'required|date',
-            'imagem' => 'nullable|image|max:2048', // validação da imagem
         ]);
 
-        if ($request->hasFile('imagem')) {
-            $image = $request->file('imagem');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $imagePath = $image->storeAs('images', $imageName, 'public');
-            $validatedData['imagem'] = $imagePath;
-        }
+
 
         Contato::create($validatedData);
 
@@ -73,15 +67,10 @@ class ContatoController extends Controller
                 'cpf' => 'sometimes|string|max:14|unique:contatos,cpf,' . $contato->id,
                 'email' => 'sometimes|string|email|max:255|unique:contatos,email,' . $contato->id,
                 'data_nascimento' => 'sometimes|date',
-                'imagem' => 'nullable|image|max:2048', // validação da imagem
+
             ]);
 
-            if ($request->hasFile('imagem')) {
-                $image = $request->file('imagem');
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $imagePath = $image->storeAs('images', $imageName, 'public');
-                $validatedData['imagem'] = $imagePath;
-            }
+
 
             $contato->update($validatedData);
             return redirect()->route('contatos.index')->with('success', 'Contato atualizado com sucesso!');
