@@ -11,7 +11,7 @@ class Contato extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome_completo', 'cpf', 'email', 'data_nascimento','imagem'
+        'nome_completo', 'cpf', 'email', 'data_nascimento'
     ];
     protected $dates = [
         'data_nascimento',

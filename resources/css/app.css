@@ -302,3 +302,8 @@ button:hover {
     background-color: var(--color-blue2);
 
 }
+.exibir-contato{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
